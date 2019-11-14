@@ -1,0 +1,87 @@
+<div class="container" [hidden]="submitted">
+    <h1>Donor Details</h1>
+    <form (ngSubmit)="onSubmit()" #donForm="ngForm">
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" class="form-control" id="name" required [(ngModel)]="model.name" name="name"
+        #name="ngModel" #spy>
+        <br>TODO: remove this: {{spy.className}}
+        <div [hidden]="name.valid || name.pristine"
+        class="alert alert-danger">
+     Name is required
+   </div>
+      </div>
+
+      <div class="form-group">
+        <label for="emailid">Email ID</label>
+        <input type="text" class="form-control" id="emailid" required [(ngModel)]="model.emailid" name="emailid"
+        #emailid="ngModel">
+        <div [hidden]="emailid.valid || emailid.pristine"
+        class="alert alert-danger">
+     Email ID is required
+   </div>
+      </div>
+
+      <div class="form-group">
+        <label for="phonenumber">Phone Number</label>
+        <input type="text" class="form-control" id="phonenumber" required [(ngModel)]="model.phonenumber" name="phonenumber"
+        #phonenumber="ngModel">
+        <div [hidden]="phonenumber.valid || phonenumber.pristine"
+        class="alert alert-danger">
+     Phone Number is required
+   </div>
+      </div>
+
+      <div class="form-group">
+        <label for="amount">Amount</label>
+        <input type="text" class="form-control" id="amount" required [(ngModel)]="model.amount" name="amount"
+        #amount="ngModel">
+        <div [hidden]="amount.valid || amount.pristine"
+        class="alert alert-danger">
+     Amount is required
+   </div>
+      </div>
+
+      <div class="form-group">
+        <label for="country">Country</label>
+        <select class="form-control" id="country"
+                required
+                [(ngModel)]="model.country" name="country"
+                #country="ngModel">
+          <option *ngFor="let pow of countries" [value]="pow">{{pow}}</option>
+        </select>
+        <div [hidden]="country.valid || country.pristine" class="alert alert-danger">
+          Country is required
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-success"[disabled]="!donForm.form.valid">Submit</button>
+
+    </form>
+</div>
+
+<div [hidden]="!submitted">
+    <h2>You submitted the following:</h2>
+    <div class="row">
+      <div class="col-xs-3">Name</div>
+      <div class="col-xs-9">{{ model.name }}</div>
+    </div>
+    <div class="row">
+      <div class="col-xs-3">Email ID</div>
+      <div class="col-xs-9">{{ model.emailid }}</div>
+    </div>
+    <div class="row">
+        <div class="col-xs-3">Phone Number</div>
+        <div class="col-xs-9">{{ model.phonenumber }}</div>
+      </div>
+      <div class="row">
+        <div class="col-xs-3">Amount in Rupees</div>
+        <div class="col-xs-9">{{ model.amount }}</div>
+      </div>
+    <div class="row">
+      <div class="col-xs-3">Country</div>
+      <div class="col-xs-9">{{ model.country }}</div>
+    </div>
+    <br>
+    <button class="btn btn-primary" (click)="submitted=false">Edit</button>
+  </div>
